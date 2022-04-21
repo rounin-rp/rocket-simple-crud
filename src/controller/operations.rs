@@ -72,8 +72,9 @@ pub async fn update_user(username: String, user: User) -> Result<String, Transmi
         "username": username
     };
     let replace = doc! {
-        "username" : user.username,
-        "password" : user.password
+        "$set": {
+            "password" : user.password
+        }
     };
     user_collection.find_one_and_update(query, replace, None).await?;
     Ok(String::from("Success"))

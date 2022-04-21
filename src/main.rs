@@ -48,7 +48,7 @@ async fn delete_user(user: Json<User>)-> Result<status::Custom<Json<Response>>, 
     response
 }
 
-#[patch("/update-user", format = "json", data = "<user>")]
+#[patch("/update-user", data = "<user>")]
 async fn update_user(user: Json<User>)-> Result<status::Custom<Json<Response>>, status::Custom<Json<Response>>> {
     let u = user.into_inner();
     let result = operations::update_user(u.username.clone(), u).await;
